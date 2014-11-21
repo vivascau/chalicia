@@ -4,7 +4,11 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', ['ionic',
+  'chal.calendar',
+  'chal.calendars.controllers',
+  'chal.login.controllers',
+])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -27,46 +31,38 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: "/app",
       abstract: true,
       templateUrl: "templates/menu.html",
-      controller: 'AppCtrl'
+      controller: 'LoginCtrl'
     })
 
-    .state('app.search', {
-      url: "/search",
+    .state('app.login', {
+      url: "/login",
       views: {
         'menuContent' :{
-          templateUrl: "templates/search.html"
+          templateUrl: "js/login/login.html"
         }
       }
     })
 
-    .state('app.browse', {
-      url: "/browse",
+    .state('app.calendars', {
+      url: "/calendars",
       views: {
         'menuContent' :{
-          templateUrl: "templates/browse.html"
-        }
-      }
-    })
-    .state('app.playlists', {
-      url: "/playlists",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
+          templateUrl: "js/calendars/calendars.html",
+          controller: 'CalendarsCtrl'
         }
       }
     })
 
-    .state('app.single', {
-      url: "/playlists/:playlistId",
+    .state('app.calendar', {
+      url: "/calendars/:calendarId",
       views: {
         'menuContent' :{
-          templateUrl: "templates/playlist.html",
-          controller: 'PlaylistCtrl'
+          templateUrl: "js/calendars/calendar.html",
+          controller: 'CalendarCtrl'
         }
       }
     });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/app/login');
 });
 
